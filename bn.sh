@@ -51,7 +51,7 @@ rankNames () {
     setFullGender "$GENDER" # sets the gender for both iterations
 
     TOTALNAMES=$(cat $FILE | grep -P -i ",$GENDER" | wc -l) # find the total number of names for the given gender
-    NAMERANKING=$(cat $FILE | grep -P -i ",$GENDER"| grep -n -P "$NAME" | grep -P "[0-9]{1,4}:$NAME," | grep -o -P '^[0-9]+')   # extracts the ranking
+    NAMERANKING=$(cat $FILE | grep -P -i ",$GENDER"| grep -n -P -i "$NAME" | grep -P -i "[0-9]{1,4}:$NAME," | grep -o -P -i '^[0-9]+')   # extracts the ranking
 
     # checks to see if the name exists, and runs the correspond commands based on its existence
     if [[ -n $NAMERANKING ]]        
