@@ -6,8 +6,24 @@
 
 # FUNCTION PURPOSE
 help() {
-    echo "This is my help function!"
-    echo "I dont know what to write yet..."
+    echo "  bn - Baby Names Utility"
+    echo "  Version: v1.0.0"
+    echo "" 
+    echo "  The bn is a command-line utility that allows users to search for the "
+    echo "  ranking of baby names from the United States Social Security Adminstration's "
+    echo "  baby names data. The user can search based on data from a specific year, and "
+    echo "  the baby's gender."
+    echo ""
+    echo "  Usage: "
+    echo "      bn <year> <assigned gender: f|F|m|M|b|B>"
+    echo ""
+    echo "  Arguments: "
+    echo "      <year>              the year to search for the baby's name (1880-2022)"
+    echo "      <assigned gender>   the gender to search for: "
+    echo "                              - f or F: female names "
+    echo "                              - f or F: male names "
+    echo "                              - b or B: male and female names "
+
 }
 
 # FUNCTION PURPOSE
@@ -20,14 +36,14 @@ usage() {
     then
         echo "Badly formatted assigned gender: $2"
         echo "bn <year> <assigned gender: f|F|m|M|b|B>" >&2
-        exit 1
+        exit 2
     elif [[ $1 = "EXIT3" ]]
     then 
         echo "Badly formatted name: $2" >&2
-        exit 1
+        exit 3
     else
         echo "No data for $2" >&2
-        exit 1
+        exit 4
     fi
 }
 
@@ -64,7 +80,7 @@ rankNames () {
 
 # FUNCTION PURPOSE
 main() {
-    if [[ "$GENDER" = "b" ]]
+    if [[ "$GENDER" =~ [bB] ]] 
     then    
         # runs all the following commands for male and female if b is entered 
         for CURRENT_GENDER in m f
@@ -122,4 +138,3 @@ else
         fi
     done
 fi
-
