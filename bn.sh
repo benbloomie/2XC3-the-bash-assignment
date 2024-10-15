@@ -60,21 +60,21 @@ setFullGender() {
 
 # FUNCTION PURPOSE
 rankNames () {
-    local NAME=$1
+    local FOUNDNAME=$1
     local GENDER=$2
     local YEAR=$3
     local FILE="yob${YEAR}.txt"
     setFullGender "$GENDER" # sets the gender for both iterations
 
     TOTALNAMES=$(cat $FILE | grep -P -i ",$GENDER" | wc -l) # find the total number of names for the given gender
-    NAMERANKING=$(cat $FILE | grep -P -i ",$GENDER"| grep -n -P -i "$NAME" | grep -P -i "[0-9]{1,4}:$NAME," | grep -o -P -i '^[0-9]+')   # extracts the ranking
+    NAMERANKING=$(cat $FILE | grep -P -i ",$GENDER"| grep -n -P -i "$FOUNDNAME" | grep -P -i "[0-9]{1,4}:$FOUNDNAME," | grep -o -P -i '^[0-9]+')   # extracts the ranking
 
     # checks to see if the name exists, and runs the correspond commands based on its existence
     if [[ -n $NAMERANKING ]]        
     then        
-            echo "${YEAR}: $NAME ranked $NAMERANKING out of $TOTALNAMES $FULLGENDER names."    # print message at the end
+            echo "${YEAR}: $FOUNDNAME ranked $NAMERANKING out of $TOTALNAMES $FULLGENDER names."    # print message at the end
     else
-        echo "${YEAR}: $NAME not found among $FULLGENDER names"
+        echo "${YEAR}: $FOUNDNAME not found among $FULLGENDER names"
     fi
 }
 
@@ -85,12 +85,12 @@ main() {
         # runs all the following commands for male and female if b is entered 
         for CURRENT_GENDER in m f
         do
-            rankNames "$NAME" "$CURRENT_GENDER" "$YEAR"
+            rankNames "$BABYNAME" "$CURRENT_GENDER" "$YEAR"
         done
 
     # if the user inputted an m/M ir f/F
     else
-        rankNames "$NAME" "$GENDER" "$YEAR"
+        rankNames "$BABYNAME" "$GENDER" "$YEAR"
     fi
 }
 
@@ -118,18 +118,18 @@ else
     while true
     do
         # allows user to enter names for the computer to search for
-        if read NAMES
+        if read ALLNAMES
         then
-            for NAME in $NAMES
+            for BABYNAME in $ALLNAMES
             do
                 # checks if each name is a valid string before calling the main function
-                if ! [[ $NAME =~ ^[a-zA-Z]+$ ]]
+                if ! [[ $BABYNAME =~ ^[a-zA-Z]+$ ]]
                 then 
-                    usage "EXIT3" "$NAME" 
+                    usage "EXIT3" "$BABYNAME" 
                     exit 1
                 # if the name is accepted, call the main function to get results
                 else
-                    main "$NAME" "$GENDER"
+                    main "$BABYNAME" "$GENDER"
                 fi
             done
         # if EOF is received, read will return 0, and will break out of the loop
