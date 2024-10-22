@@ -1,10 +1,15 @@
 #!/bin/bash
-# PURPOSE OF THE CODE
-# Benjamin Bloomfield, McMaster University, DATE
+# this program is a command-line utility that allows users to search for the the ranking of 
+# baby names from the United States Social Security Adminstration data, based on year and gender.
+# users can continue to enter names until the program reaches EOF, or bad user input
+# Benjamin Bloomfield, McMaster University, October 22, 2024
 
-### FUNCTION DECLERATION ###
 
-# FUNCTION PURPOSE
+# Name of the function: help
+#
+# Function Description:
+#   prints the help information which gives feedback of the usage, version and description.
+#   it also provides detials on how to use the utility, and describes the possible arguments
 help() {
     echo "  bn - Baby Names Utility"
     echo "  Version: v1.0.0"
@@ -26,7 +31,19 @@ help() {
 
 }
 
-# FUNCTION PURPOSE
+
+# Name of the function: usage
+# 
+# Paramaters:
+#  $1 --> an error type string 
+#  $2 --> an additional argument for the error message
+# Function Description:
+#   provides feedback corresponding the users usage error.
+#       - "EXIT1": incorrect number of arguments
+#       - "EXIT2": improperly formatted gender input
+#       - "EXIT3": badly formatted name input
+#       - "EXIT4": no data available for the specified year
+#   it returns the corresponding exit code for each error type.
 usage() {
     if [[ $1 = "EXIT1" ]]
     then
@@ -34,7 +51,7 @@ usage() {
         exit 1
     elif [[ $1 = "EXIT2" ]]
     then
-        echo "Badly formatted assigned gender: $2"
+        echo "Badly formatted assigned gender: $2" >&2
         echo "bn <year> <assigned gender: f|F|m|M|b|B>" >&2
         exit 2
     elif [[ $1 = "EXIT3" ]]
@@ -47,7 +64,12 @@ usage() {
     fi
 }
 
-# FUNCTION PURPOSE
+
+# Name of the function: setFullGender
+#
+# Function Description:
+#   converts the character that represents the gender to a string, to be called and printed
+#   in the main function for the outputted message
 setFullGender() {
     if [[ $GENDER =~ ^[mM]$ ]]
     then
@@ -58,7 +80,17 @@ setFullGender() {
     fi
 }
 
-# FUNCTION PURPOSE
+
+# Name of the function: rankNames
+#
+# Parameters:
+#  $1 --> the baby name to search for
+#  $2 --> the gender of the baby name 
+#  $3 --> the year to search in
+# Function Description:
+#   searches through the list of files to find the corresponding file to the specified year from the user, and then searches  
+#   for the baby name within that year's ranking for the given gender. it then counts the total number of names for the specified gender
+#   and retrives the rank of the input name 
 rankNames () {
     local FOUNDNAME=$1
     local GENDER=$2
@@ -66,19 +98,25 @@ rankNames () {
     local FILE="yob${YEAR}.txt"
     setFullGender "$GENDER" # sets the gender for both iterations
 
-    TOTALNAMES=$(cat $FILE | grep -P -i ",$GENDER" | wc -l) # find the total number of names for the given gender
-    NAMERANKING=$(cat $FILE | grep -P -i ",$GENDER"| grep -n -P -i "$FOUNDNAME" | grep -P -i "[0-9]{1,4}:$FOUNDNAME," | grep -o -P -i '^[0-9]+')   # extracts the ranking
+    TOTALNAMES=$(cat ./us_baby_names/$FILE | grep -P -i ",$GENDER" | wc -l) # find the total number of names for the given gender
+    NAMERANKING=$(cat ./us_baby_names/$FILE | grep -P -i ",$GENDER"| grep -n -P -i "$FOUNDNAME" | grep -P -i "[0-9]{1,4}:$FOUNDNAME," | grep -o -P -i '^[0-9]+')   # extracts the ranking
 
     # checks to see if the name exists, and runs the correspond commands based on its existence
     if [[ -n $NAMERANKING ]]        
     then        
             echo "${YEAR}: $FOUNDNAME ranked $NAMERANKING out of $TOTALNAMES $FULLGENDER names."    # print message at the end
     else
-        echo "${YEAR}: $FOUNDNAME not found among $FULLGENDER names"
+        echo "${YEAR}: $FOUNDNAME not found among $FULLGENDER names."
     fi
 }
 
-# FUNCTION PURPOSE
+
+# Name of the function: main
+#
+# Function Description:
+#   processes input to handle the searching for the baby names based on the inputted gender. 
+#   calls the rankNames method to handle all of the ranking for the specifc arguments
+#   if 'b' or 'B' is entered, it searches for both male and female rankings, otherwise, seraches for the specified gender
 main() {
     if [[ "$GENDER" =~ [bB] ]] 
     then    
@@ -94,7 +132,6 @@ main() {
     fi
 }
 
-### MAIN SCRIPT ###
 
 # variable initialization for the year and gender
 YEAR=$1
@@ -108,7 +145,7 @@ then
     usage "EXIT1"
 elif [[ $2 =~ [^fFmMbB] ]]  # checks if the user passes a proper gender type
 then
-    usage "EXIT2"
+    usage "EXIT2" "$2"
 elif [[ ! -f "yob${YEAR}.txt" ]]    # checks if a file exists for the year the user enters
 then 
     usage "EXIT4" "$YEAR"
