@@ -2,14 +2,14 @@
 # A simple framework for testing the bn scripts
 # Returns the number of failed test cases.
 # The test function used in the script was taken the from week04 directory
-#   Sam Scott, McMaster University, 2024
+#   Sam Scott, McMaster University, 2024.
 #
 # Format of a test:
 #     test 'command' expected_return_value 'stdin text' 'expected stdout' 'expected stderr'
 #
 # Some example test cases are given. You should add more test cases.
 #
-# Benjamin Bloomfield, McMaster University, DATE
+# Benjamin Bloomfield, McMaster University, October 22, 2024
 
 
 # GLOBALS: tc = test case number, fails = number of failed cases

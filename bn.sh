@@ -2,7 +2,7 @@
 # this program is a command-line utility that allows users to search for the the ranking of 
 # baby names from the United States Social Security Adminstration data, based on year and gender.
 # users can continue to enter names until the program reaches EOF, or bad user input
-# Benjamin Bloomfield, McMaster University, October 22, 2024
+# Benjamin Bloomfield, McMaster University, October 22, 2024.
 
 
 # Name of the function: help
