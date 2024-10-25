@@ -2,7 +2,7 @@
 # this program is a command-line utility that allows users to search for the the ranking of 
 # baby names from the United States Social Security Adminstration data, based on year and gender.
 # users can continue to enter names until the program reaches EOF, or bad user input
-# Benjamin Bloomfield, McMaster University, October 22, 2024.
+# Benjamin Bloomfield, McMaster University, October 24, 2024.
 
 
 # Name of the function: help
@@ -146,7 +146,7 @@ then
 elif [[ $2 =~ [^fFmMbB] ]]  # checks if the user passes a proper gender type
 then
     usage "EXIT2" "$2"
-elif [[ ! -f "yob${YEAR}.txt" ]]    # checks if a file exists for the year the user enters
+elif [[ ! -f "./us_baby_names/yob${YEAR}.txt" ]]    # checks if a file exists for the year the user enters
 then 
     usage "EXIT4" "$YEAR"
 

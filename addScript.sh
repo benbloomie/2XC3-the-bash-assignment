@@ -1,6 +1,6 @@
 #!/bin/bash
 # this script automates git add, commit, push and tag for bn.sh
-# Benjamin Bloomfield, McMaster University, October 22, 2024.
+# Benjamin Bloomfield, McMaster University, October 24, 2024.
 
 git add bn.sh
 
