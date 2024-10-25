@@ -1,7 +1,7 @@
 #!/bin/bash
 # A simple framework for testing the bn scripts
 # Returns the number of failed test cases.
-# The test function used in the script was taken the from week04 directory
+# The test function used in the script was taken the from week04 directory.
 #   Sam Scott, McMaster University, 2024.
 #
 # Format of a test:

@@ -1,7 +1,7 @@
 #!/bin/bash
 # this program is a command-line utility that allows users to search for the the ranking of 
 # baby names from the United States Social Security Adminstration data, based on year and gender.
-# users can continue to enter names until the program reaches EOF, or bad user input
+# users can continue to enter names until the program reaches EOF, or bad user input.
 # Benjamin Bloomfield, McMaster University, October 24, 2024.
 
 
@@ -9,7 +9,7 @@
 #
 # Function Description:
 #   prints the help information which gives feedback of the usage, version and description.
-#   it also provides detials on how to use the utility, and describes the possible arguments
+#   it also provides details on how to use the utility, and describes the possible arguments
 help() {
     echo "  bn - Baby Names Utility"
     echo "  Version: v1.0.0"
@@ -26,7 +26,7 @@ help() {
     echo "      <year>              the year to search for the baby's name (1880-2022)"
     echo "      <assigned gender>   the gender to search for: "
     echo "                              - f or F: female names "
-    echo "                              - f or F: male names "
+    echo "                              - m or M: male names "
     echo "                              - b or B: male and female names "
 
 }
