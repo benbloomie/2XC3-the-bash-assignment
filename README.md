@@ -37,4 +37,4 @@ This bash utility lets users search the ranking of baby names based on data from
 Run the script with the year and gender as arguments:
 
 ```bash
-./bn.sh <year> <gender>
+./bn.sh <year> <assigned gender: f|F|m|M|b|B>
