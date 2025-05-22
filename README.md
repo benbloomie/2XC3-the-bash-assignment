@@ -18,8 +18,8 @@ This bash utility lets users search the ranking of baby names based on data from
 1. Clone or download the repository:
 
     ```bash
-    git clone https://github.com/benbloomie/2XC3-the-bash-assignment
-    cd 2XC3-the-bash-assignment
+    git clone https://github.com/benbloomie/baby-names-utility
+    cd baby-names-utility
     ```
 
 2. Ensure the baby names data files are inside the folder `./us_baby_names/`.
