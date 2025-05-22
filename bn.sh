@@ -28,7 +28,6 @@ help() {
     echo "                              - f or F: female names "
     echo "                              - m or M: male names "
     echo "                              - b or B: male and female names "
-
 }
 
 

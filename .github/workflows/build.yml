@@ -1,0 +1,23 @@
+name: test bn.sh
+
+on:							
+  push:
+    branches: [ "main" ]			
+
+jobs:
+  build:						
+    runs-on: ubuntu-latest			
+    steps:
+      - uses: actions/checkout@v4		
+
+      - name: make scripts executable			
+        run: chmod 755 bn.sh test_script.sh
+
+      - name: run test script		
+        run: ./test_script.sh	
+
+      - name: upload test output			
+        uses: actions/upload-artifact@v4	
+        with:
+          name: test-output			
+          path: ./test_output.txt	
