@@ -32,7 +32,7 @@ This bash utility lets users search the ranking of baby names based on data from
 
 ---
 
-## Executing Program
+## Executing the Program
 
 Run the script with the year and gender as arguments:
 
